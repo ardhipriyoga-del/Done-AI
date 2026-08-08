@@ -38,6 +38,7 @@ import BillingRuleSettings from './billingRuleSettings';
 import TemplatePesanKasirContent from './templatePesanKasir';
 import MasterChecklistPasien from '../components/MasterChecklistPasien';
 import MasterEstimasiTindakanPanel from '../components/MasterEstimasiTindakanPanel';
+import WhatsAppSettingsPanel from '../components/WhatsAppSettingsPanel';
 import {
   DEFAULT_OPERATING_THEATRE_CONFIG,
   fetchOperatingTheatre,
@@ -763,6 +764,7 @@ export default function SettingsPage() {
             label="Integrasi TrakCare"
           />
         )}
+         {isSuperuser && <TabButton active={activeTab === 'whatsapp'} onClick={() => setActiveTab('whatsapp')} icon={MessageSquare} label="WhatsApp" />}
         {isSuperuser && <TabButton active={activeTab === 'import'} onClick={() => setActiveTab('import')} icon={Upload} label="Import Data" />}
         {isSuperuser && <TabButton active={activeTab === 'masterTarif'} onClick={() => setActiveTab('masterTarif')} icon={FileSpreadsheet} label="Master Tarif" />}
         {isSuperuser && <TabButton active={activeTab === 'masterEstimasi'} onClick={() => setActiveTab('masterEstimasi')} icon={FileSpreadsheet} label="Master Estimasi Tindakan" />}
@@ -777,6 +779,8 @@ export default function SettingsPage() {
           </>
         )}
       </div>
+
+      {activeTab === 'whatsapp' && isSuperuser && <WhatsAppSettingsPanel />}
 
       {activeTab === 'profil' && (
         <div className="space-y-6">

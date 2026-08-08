@@ -47,7 +47,8 @@ export type SettingsTab =
   | 'import'
   | 'download'
   | 'templatePesan'
-  | 'billingRule';
+  | 'billingRule'
+  | 'whatsapp';
 
 export function canAccessSettingsTab(role: AppRole, tab: SettingsTab): boolean {
   if (role === 'superuser') return true;

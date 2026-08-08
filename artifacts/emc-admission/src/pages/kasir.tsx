@@ -15,6 +15,7 @@ import { useLocation } from 'wouter';
 import { EpisodeLink } from '@/components/EpisodeLink';
 import { formatDate } from '../lib/utils';
 import { triggerAutoBackup } from '../lib/cloudSync';
+import { sendWhatsApp } from '../lib/whatsapp';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -857,11 +858,16 @@ function PesanKasirTab() {
     navigator.clipboard.writeText(message).then(() => toast.success('Pesan disalin ke clipboard!'));
   };
 
-  const openWhatsApp = () => {
+  const openWhatsApp = async () => {
     if (!message) return;
     const hp = selectedPatient?.noHpPJ || '';
     if (!hp) { toast.error('No HP Penanggung Jawab belum diisi di data pasien.'); return; }
-    window.open(waLink(hp, message), '_blank');
+    try {
+      const result = await sendWhatsApp(hp, message);
+      toast.success(result.message || 'WhatsApp berhasil dikirim.');
+    } catch (error) {
+      toast.error(`WhatsApp gagal dikirim: ${error instanceof Error ? error.message : 'Terjadi kesalahan.'}`);
+    }
   };
 
   const startHpEdit = () => {
