@@ -1,0 +1,20 @@
+:root {
+  --background: 186 48% 97%;
+  --foreground: 190 42% 17%;
+  --border: 186 28% 86%;
+  --card: 0 0% 100%;
+  --card-foreground: 190 42% 17%;
+  --muted: 186 35% 94%;
+  --muted-foreground: 190 23% 45%;
+  --primary: 186 100% 38%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 186 72% 93%;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
